@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": "f40f",
+      "name": "Akash Adalage",
+      "email": "akash990052@gmail.com",
+      "password": "Arjun@2000",
+      "isActive": true,
+      "role": "USER"
+    },
+    {
+      "id": "e253",
+      "name": "Arjun Adalage",
+      "email": "arjun990052@gmail.com",
+      "password": "Raj@9900",
+      "isActive": true,
+      "role": "USER"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "611a",
+      "userName": "Arjun Adalage",
+      "email": "arjun990052@gmail.com",
+      "dateTime": "2025-12-15T09:30:00.000Z"
+    },
+    {
+      "id": "0c50",
+      "userName": "Akash Adalage",
+      "email": "akash990052@gmail.com",
+      "dateTime": "2025-12-15T14:30:00.000Z"
+    }
+  ],
+  "closedSlots": [],
+  "messages": [
+    {
+      "text": "Shop is closed",
+      "active": true,
+      "id": "1ff9"
+    }
+  ]
+}

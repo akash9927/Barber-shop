@@ -1,0 +1,73 @@
+<div class="signup-wrapper">
+
+    <!-- HEADER TEXT -->
+    <div class="signup-header">
+        <h1>Create your account </h1>
+        <p>Join Royal Cuts Salon and book your slot in seconds</p>
+    </div>
+
+    <!-- SIGNUP CARD -->
+    <mat-card class="signup-card">
+        <mat-card-title>Sign Up</mat-card-title>
+
+        <form #signupForm="ngForm" (ngSubmit)="signup()">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Full Name</mat-label>
+                <input matInput name="name" [(ngModel)]="name" required #nameRef="ngModel" />
+                <mat-error *ngIf="nameRef.invalid && nameRef.touched">
+                    Name is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" name="email" [(ngModel)]="email" required email #emailRef="ngModel" />
+                <mat-error *ngIf="emailRef.invalid && emailRef.touched">
+                    Enter a valid email
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" [(ngModel)]="password" required minlength="6"
+                    #passwordRef="ngModel" />
+                <mat-error *ngIf="passwordRef.invalid && passwordRef.touched">
+                    Minimum 6 characters required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required
+                    #confirmRef="ngModel" />
+                <mat-error *ngIf="confirmRef.touched && password !== confirmPassword">
+                    Passwords do not match
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="full-width" type="submit"
+                [disabled]="signupForm.invalid || password !== confirmPassword">
+                Create Account
+            </button>
+
+            <p class="error" *ngIf="error">{{ error }}</p>
+
+        </form>
+
+
+    </mat-card>
+
+    <!-- FOOTER -->
+    <div class="signup-footer">
+        <p>
+            Already have an account?
+            <a routerLink="/login">Login here</a>
+        </p>
+
+        <small>
+            By signing up, you agree to our Terms & Privacy Policy
+        </small>
+    </div>
+
+</div>

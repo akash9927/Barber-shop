@@ -1,0 +1,85 @@
+<div class="admin-message" *ngIf="message">
+    {{ message }}
+</div>
+
+<div class="page">
+
+    <mat-card class="booking-card">
+        <mat-card-title>Book Haircut Slot</mat-card-title>
+
+        <!-- DATE -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Select Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [min]="minDate" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- TABS -->
+        <mat-tab-group>
+
+            <mat-tab label="Morning">
+                <div class="slots">
+                    <button mat-stroked-button *ngFor="let slot of morningSlots" (click)="selectSlot(slot)"
+                        [disabled]="isSlotDisabled(slot)" [color]="selectedTime === slot ? 'primary' : undefined">
+                        {{ slot }}
+                    </button>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Afternoon">
+                <div class="slots">
+                    <button mat-stroked-button *ngFor="let slot of afternoonSlots" (click)="selectSlot(slot)"
+                        [disabled]="isSlotDisabled(slot)" [color]="selectedTime === slot ? 'primary' : undefined">
+                        {{ slot }}
+                    </button>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Evening">
+                <div class="slots">
+                    <button mat-stroked-button *ngFor="let slot of eveningSlots" (click)="selectSlot(slot)"
+                        [disabled]="isSlotDisabled(slot)" [color]="selectedTime === slot ? 'primary' : undefined">
+                        {{ slot }}
+                    </button>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+
+        <button mat-raised-button color="primary" class="full-width" (click)="bookSlot()">
+            Book Slot
+        </button>
+
+        <p class="error" *ngIf="error">{{ error }}</p>
+        <p class="success" *ngIf="success">{{ success }}</p>
+
+    </mat-card>
+
+    <!-- 📋 BOOKING HISTORY TABLE -->
+    <mat-card class="booking-card" *ngIf="bookings.length">
+        <mat-card-title>Booking History</mat-card-title>
+
+        <table class="booking-table">
+            <tr>
+                <th>User</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+
+
+            <tr *ngFor="let b of bookings; let i = index">
+                <td>{{ b.userName }}</td>
+                <td>{{ b.dateTime | date:'mediumDate' }}</td>
+                <td>{{ b.dateTime | date:'shortTime' }}</td>
+                <td>
+                    <button mat-button color="warn" (click)="cancelBooking(i)">
+                        Cancel
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+
+</div>
