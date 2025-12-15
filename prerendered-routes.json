@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "/admin",
+    "/admin-login",
+    "/booking",
+    "/login",
+    "/signup"
+  ]
+}
