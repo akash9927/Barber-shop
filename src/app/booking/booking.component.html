@@ -74,9 +74,10 @@
                 <td>{{ b.dateTime | date:'mediumDate' }}</td>
                 <td>{{ b.dateTime | date:'shortTime' }}</td>
                 <td>
-                    <button mat-button color="warn" (click)="cancelBooking(i)">
+                    <button mat-button color="warn" (click)="cancelBooking(bookings)">
                         Cancel
                     </button>
+
                 </td>
             </tr>
         </table>

@@ -18,6 +18,7 @@ export class BookingComponent implements OnInit {
   minDate: Date = new Date();
 
   bookings: any[] = [];
+  userId = Number(localStorage.getItem('userId'));
 
   morningSlots = ['09:00', '10:00', '11:00'];
   afternoonSlots = ['12:00', '13:00', '14:00', '15:00', '16:00'];
@@ -41,10 +42,12 @@ export class BookingComponent implements OnInit {
   }
 
   // 🔄 Load ALL bookings (used by user & admin)
-  loadBookings(): void {
-    this.apiService.getBookings().subscribe(data => {
-      this.bookings = data.reverse(); // latest first
-    });
+  loadBookings() {
+    this.apiService
+      .getUserBookings(this.userId)
+      .subscribe(data => {
+        this.bookings = data;
+      });
   }
 
   selectSlot(time: string): void {
@@ -120,12 +123,17 @@ export class BookingComponent implements OnInit {
   }
 
   // ❌ Cancel booking
-  cancelBooking(index: number): void {
-    this.bookings.splice(index, 1);
 
-    localStorage.setItem(
-      'salon_bookings',
-      JSON.stringify(this.bookings)
-    );
+  cancelBooking(booking: any) {
+    if (booking.userId !== this.userId) {
+      alert('Unauthorized action');
+      return;
+    }
+
+    this.apiService.deleteBooking(booking.id).subscribe(() => {
+      this.loadBookings();
+    });
   }
+
+
 }

@@ -1,55 +1,49 @@
 <div class="login-page">
-    <button mat-stroked-button color="accent" class="admin-btn right side" (click)="goToAdminLogin()">
+    <button mat-stroked-button color="accent" class="admin-btn" (click)="goToAdminLogin()">
         Admin Login
     </button>
 
     <!-- LEFT SECTION -->
     <div class="branding">
-        <h1> Royal Cuts Salon</h1>
-        <h3>Premium Hair & Grooming</h3>
-        <p class="tagline">
-            Book your haircut in advance & skip the wait
-        </p>
-        <img src="\assets\barber.jpg" alt="Salon Image" class="shop-image" />
+        <h1 class="brand-title">Royal Cuts Salon</h1>
+
+        <img src="\assets\The shop.jpg" alt="Royal Cuts Salon" class="brand-image" />
+        <p class="brand-description">Welcome to Royal Cuts Salon, where we provide top-notch barber services to make
+            your hair look its best.</p>
     </div>
+
 
     <!-- RIGHT SECTION -->
     <div class="login-section">
         <mat-card class="auth-card">
-            <mat-card-title>Login</mat-card-title>
+            <mat-card-title class="card-title">Login</mat-card-title>
+
             <form>
-                <mat-card>
+                <mat-form-field class="full-width">
+                    <input matInput type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+                </mat-form-field>
 
-                    <mat-form-field class="full-width">
-                        <input matInput type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-                    </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password"
+                        required />
+                </mat-form-field>
 
-                    <mat-form-field class="full-width">
-                        <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password"
-                            required />
-                    </mat-form-field>
+                <button mat-raised-button color="primary" class="login-btn" type="button" (click)="login()">
+                    Login
+                </button>
 
-                    <button mat-raised-button color="primary" type="button" (click)="login()">
-                        Login
-                    </button>
-
-                    <p class="error" *ngIf="error">{{ error }}</p>
-                </mat-card>
+                <p class="error" *ngIf="error">{{ error }}</p>
             </form>
-
-
-
 
             <p class="link">
                 Don’t have an account?
                 <a routerLink="/signup">Sign up</a>
             </p>
         </mat-card>
-    </div>
 
+    </div>
 </div>
 
-<!-- REVIEWS SECTION -->
 <div class="reviews">
     <div class="reviews-track">
         ⭐ Amazing service! &nbsp;&nbsp;

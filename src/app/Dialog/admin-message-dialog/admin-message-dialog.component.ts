@@ -10,6 +10,8 @@ import { ApiService } from '../../services/services/api.service';
 export class AdminMessageDialogComponent {
 
   message = '';
+  startTime = '';
+  endTime = '';
 
   constructor(
     private dialogRef: MatDialogRef<AdminMessageDialogComponent>,
@@ -20,14 +22,34 @@ export class AdminMessageDialogComponent {
   }
 
   save(): void {
-    if (!this.data.id) {
+
+    const id = this.data?.id;
+    if (!id) {
       console.error('Message ID is missing');
       return;
     }
 
     const payload = {
       text: this.message,
+      startTime: this.startTime,
+      endTime: this.endTime,
       active: true
+    };
+
+    this.apiService.updateMessage(id, payload)
+      .subscribe(() => {
+        this.dialogRef.close(true);
+      });
+  }
+
+
+
+  clear(): void {
+    const payload = {
+      text: '',
+      startTime: '',
+      endTime: '',
+      active: false
     };
 
     this.apiService.updateMessage(this.data.id, payload)
@@ -36,10 +58,7 @@ export class AdminMessageDialogComponent {
       });
   }
 
-
   close(): void {
     this.dialogRef.close(false);
   }
 }
-
-

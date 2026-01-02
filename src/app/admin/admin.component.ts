@@ -31,28 +31,32 @@ export class AdminComponent implements OnInit {
   }
 
   loadMessage(): void {
-    this.apiService.getMessage().subscribe(data => {
+    this.apiService.getMessage().subscribe((data: any[]) => {
 
-      // Case 1: Message already exists
+      // If message already exists
       if (data && data.length > 0) {
         this.adminMessage = data[0].text;
         this.messageId = data[0].id;
         return;
       }
 
-      // Case 2: No message exists → create default
+      // If message does NOT exist → create one
       const defaultMessage = {
         text: '',
-        active: true
+        startTime: '',
+        endTime: '',
+        active: false
       };
 
       this.apiService.createMessage(defaultMessage)
         .subscribe((created: any) => {
           this.adminMessage = created.text;
-          this.messageId = created.id;
+          this.messageId = created.id; // ✅ GUARANTEED ID
         });
     });
   }
+
+
 
 
   ngOnInit(): void {
@@ -76,14 +80,27 @@ export class AdminComponent implements OnInit {
     this.authService.logout();
   }
   openMessagePopup(): void {
-    this.dialog.open(AdminMessageDialogComponent, {
+
+    if (!this.messageId) {
+      console.warn('Message not ready yet');
+      return;
+    }
+
+    const dialogRef = this.dialog.open(AdminMessageDialogComponent, {
       width: '400px',
       data: {
-        message: this.adminMessage,
-        id: this.messageId
+        id: this.messageId,
+        message: this.adminMessage
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(updated => {
+      if (updated) {
+        this.loadMessage();
       }
     });
   }
+
 
 
 }

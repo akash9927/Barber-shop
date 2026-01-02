@@ -16,6 +16,17 @@ export class ApiService {
     return this.http.get<any[]>(`${this.BASE_URL}/users`);
   }
 
+  getUserBookings(userId: number) {
+    return this.http.get<any[]>(
+      `http://localhost:3000/bookings?userId=${userId}`
+    );
+  }
+
+  deleteBooking(id: number) {
+    return this.http.delete(`http://localhost:3000/bookings/${id}`);
+  }
+
+
   createUser(user: any): Observable<any> {
     return this.http.post(`${this.BASE_URL}/users`, user);
   }
@@ -33,12 +44,8 @@ export class ApiService {
     return this.http.post(`${this.BASE_URL}/bookings`, booking);
   }
 
-  // deleteBooking(id: number): Observable<any> {
-  //   return this.http.delete(`${this.BASE_URL}/bookings/${id}`);
-  // }
-  deleteBooking(id: number) {
-    return this.http.delete(`http://localhost:3000/bookings/${id}`);
-  }
+
+
 
   // ===== CLOSED SLOTS =====
   getClosedSlots(): Observable<any[]> {
