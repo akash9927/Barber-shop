@@ -25,22 +25,15 @@
       "role": "USER"
     }
   ],
-  "bookings": [
-    {
-      "id": "0c50",
-      "userName": "Akash Adalage",
-      "email": "akash990052@gmail.com",
-      "dateTime": "2025-12-15T14:30:00.000Z"
-    }
-  ],
+  "bookings": [],
   "closedSlots": [],
   "messages": [
     {
-      "id": "c72a",
       "text": "",
       "startTime": "",
       "endTime": "",
-      "active": false
+      "active": false,
+      "id": "c72a"
     }
   ]
 }
